@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://netherlands.avokatfinder.com/sitemap.xml
