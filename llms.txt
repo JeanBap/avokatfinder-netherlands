@@ -1,5 +1,36 @@
 # AvökatFinder Netherlands
-> English-speaking law firm directory for Netherlands
+> The English-language directory of lawyers and law firms in Netherlands for expats, foreign nationals and international businesses.
 
-Directory: https://netherlands.avokatfinder.com
-Email: info@avokatfinder.com
+## Main Pages
+- https://netherlands.avokatfinder.com/: Home — find an English-speaking lawyer in Netherlands
+- https://netherlands.avokatfinder.com/lawyers/: Directory of verified law firms and lawyers in Netherlands
+- https://netherlands.avokatfinder.com/glossary/: Legal glossary — plain-English definitions of Netherlands legal terms
+- https://netherlands.avokatfinder.com/blog/: Expat legal guides and property law articles for Netherlands
+- https://netherlands.avokatfinder.com/about/: About AvökatFinder Netherlands
+- https://netherlands.avokatfinder.com/contact/: Contact us
+
+## Legal Glossary Terms
+- https://netherlands.avokatfinder.com/glossary/Appartementsrecht/
+- https://netherlands.avokatfinder.com/glossary/Erfpacht/
+- https://netherlands.avokatfinder.com/glossary/Natrekking/
+- https://netherlands.avokatfinder.com/glossary/Vruchtgebruik/
+- https://netherlands.avokatfinder.com/glossary/Zaaksvordering/
+- https://netherlands.avokatfinder.com/glossary/bsn/
+- https://netherlands.avokatfinder.com/glossary/bv-netherlands/
+- https://netherlands.avokatfinder.com/glossary/huurcontract-lease/
+- https://netherlands.avokatfinder.com/glossary/hypotheek-mortgage/
+- https://netherlands.avokatfinder.com/glossary/kadaster-cadastre/
+- https://netherlands.avokatfinder.com/glossary/koopovereenkomst/
+- https://netherlands.avokatfinder.com/glossary/notaris-nl/
+- https://netherlands.avokatfinder.com/glossary/woz-waarde/
+
+## Site Info
+- Language: English
+- Audience: Expats, foreign nationals, international property buyers and businesses in Netherlands
+- Content: Law firm directory, legal glossary, expat legal guides
+- Last updated: 2026-04-30
+- Sitemap: https://netherlands.avokatfinder.com/sitemap.xml
+
+## Permissions
+User-agent: *
+Allow: /
