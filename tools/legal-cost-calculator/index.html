@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juridische Kostenberekening | Avokatfinder Netherlands</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #333; line-height: 1.6; background: #f9fafb; }
+        header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 2rem 1rem; text-align: center; }
+        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn { padding: 0.75rem 1.5rem; background: white; border: 2px solid #e5e7eb; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; }
+        .tab-btn.active { background: #f97316; color: white; border-color: #f97316; }
+        .tab-content { display: none; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .tab-content.active { display: block; }
+        .input-group { margin-bottom: 1.5rem; }
+        label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: #1f2937; }
+        input, select { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; }
+        .result { background: #dbeafe; border-left: 4px solid #0284c7; padding: 1rem; border-radius: 4px; margin-top: 1.5rem; }
+        .result-label { font-weight: 600; color: #1f2937; }
+        .result-value { font-size: 1.5rem; color: #0284c7; font-weight: 700; }
+        footer { text-align: center; padding: 2rem; color: #666; font-size: 0.9rem; }
+        .note { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 4px; margin-top: 1rem; font-size: 0.9rem; color: #78350f; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Juridische Kostenberekening</h1>
+        <p>Schat uw juridische kosten voor verschillende Nederlandse juridische diensten</p>
+    </header>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('overdracht')">Overdrachtsbelasting</button>
+            <button class="tab-btn" onclick="switchTab('vpb')">Vennootschapsbelasting</button>
+            <button class="tab-btn" onclick="switchTab('ontslag')">Ontslagvergoeding</button>
+            <button class="tab-btn" onclick="switchTab('advocaat')">Advocaatkosten</button>
+        </div>
+
+        <!-- Overdrachtsbelasting Tab -->
+        <div id="overdracht" class="tab-content active">
+            <h2>Overdrachtsbelasting Berekening</h2>
+            <div class="input-group">
+                <label>Koopprijs (€):</label>
+                <input type="number" id="koopprijs" value="350000" oninput="calcOverdracht()">
+            </div>
+            <div class="input-group">
+                <label>Type eigendom:</label>
+                <select id="eigendomType" onchange="calcOverdracht()">
+                    <option value="woning">Hoofdwoning (eigenaar-bewoner)</option>
+                    <option value="belegging">Beleggingspand / niet-woonhuis</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Eerste Huizeigenaar:</label>
+                <select id="fhb" onchange="calcOverdracht()">
+                    <option value="nee">Nee</option>
+                    <option value="ja">Ja (tot €510.000)</option>
+                </select>
+            </div>
+            <div class="result">
+                <div class="result-label">Overdrachtsbelasting:</div>
+                <div class="result-value" id="overdtax">€0</div>
+            </div>
+            <div class="result">
+                <div class="result-label">Geschatte notariskosten:</div>
+                <div class="result-value" id="notaris">€0</div>
+            </div>
+            <div class="result">
+                <div class="result-label">Geschatte makelaarscourtage (1,25% + 21% BTW):</div>
+                <div class="result-value" id="makelaar">€0</div>
+            </div>
+            <div class="note">
+                <strong>Opmerking:</strong> Overdrachtsbelasting bedraagt 2% voor eigenaar-bewonersvilla's en 10,4% voor beleggingspanden (2024). Eerste huizeigenaren krijgen een vrijstelling tot €510.000. Notariskosten variëren van €1.500 tot 1,5% van koopprijs.
+            </div>
+        </div>
+
+        <!-- Vennootschapsbelasting Tab -->
+        <div id="vpb" class="tab-content">
+            <h2>Vennootschapsbelasting (VPB) Berekening</h2>
+            <div class="input-group">
+                <label>Jaarlijkse bedrijfswinst (€):</label>
+                <input type="number" id="winst" value="100000" oninput="calcVPB()">
+            </div>
+            <div class="result">
+                <div class="result-label">VPB-belasting (schijftarief 2024):</div>
+                <div class="result-value" id="vpbtax">€0</div>
+            </div>
+            <div class="result">
+                <div class="result-label">Geschatte BV oprichtingskosten (notaris):</div>
+                <div class="result-value">€500 - €1.500</div>
+            </div>
+            <div class="result">
+                <div class="result-label">KvK inschrijving:</div>
+                <div class="result-value">€75 (2024)</div>
+            </div>
+            <div class="note">
+                <strong>Opmerking:</strong> VPB is 19% over winsten tot €200.000 en 25,8% over bedragen daarboven (2024). BV-oprichting kost €500-€1.500 notarisgebeuken.
+            </div>
+        </div>
+
+        <!-- Ontslagvergoeding Tab -->
+        <div id="ontslag" class="tab-content">
+            <h2>Transitievergoeding Berekening</h2>
+            <div class="input-group">
+                <label>Bruto maandloon (€):</label>
+                <input type="number" id="maandloon" value="3000" oninput="calcOntslag()">
+            </div>
+            <div class="input-group">
+                <label>Dienstjaren:</label>
+                <input type="number" id="dienstjaren" value="5" min="0" oninput="calcOntslag()">
+            </div>
+            <div class="result">
+                <div class="result-label">Transitievergoeding (Wet arbeidsmarkt in balans):</div>
+                <div class="result-value" id="transvergoeding">€0</div>
+            </div>
+            <div class="note">
+                <strong>Opmerking:</strong> Transitievergoeding = (bruto maandloon × dienstjaren) / 3 per jaar, maar maximaal €94.000 of 1 jaar salaris (welke hoger). Dit maximumbedrag stijgt jaarlijks.
+            </div>
+        </div>
+
+        <!-- Advocaatkosten Tab -->
+        <div id="advocaat" class="tab-content">
+            <h2>Advocaatkosten</h2>
+            <div class="input-group">
+                <label>Geschat aantal uren juridische ondersteuning:</label>
+                <input type="number" id="uren" value="10" oninput="calcAdvocaat()">
+            </div>
+            <div class="input-group">
+                <label>Tarief per uur:</label>
+                <select id="tarief" onchange="calcAdvocaat()">
+                    <option value="200">€200/uur (junior advocaat)</option>
+                    <option value="325">€325/uur (ervaren advocaat)</option>
+                    <option value="450">€450/uur (senior advocaat)</option>
+                </select>
+            </div>
+            <div class="result">
+                <div class="result-label">Totale advocaatkosten (excl. 21% BTW):</div>
+                <div class="result-value" id="advokaat">€0</div>
+            </div>
+            <div class="result">
+                <div class="result-label">Totale kosten met BTW 21%:</div>
+                <div class="result-value" id="advocaatbtw">€0</div>
+            </div>
+            <div class="note">
+                <strong>Opmerking:</strong> Advocaten hanteren uurhonoraria van €200-€450 + 21% BTW. Controleer rechtsbijstandverzekering (rechtsbijstandsverzekering) voor dekking.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function calcOverdracht() {
+            const prijs = parseFloat(document.getElementById('koopprijs').value) || 0;
+            const type = document.getElementById('eigendomType').value;
+            const fhb = document.getElementById('fhb').value;
+            
+            let tax = 0;
+            if (type === 'woning' && fhb === 'ja') {
+                if (prijs > 510000) tax = (prijs - 510000) * 0.02;
+            } else if (type === 'woning') {
+                tax = prijs * 0.02;
+            } else {
+                tax = prijs * 0.104;
+            }
+            
+            const notaris = Math.max(1500, prijs * 0.01);
+            const makelaar = prijs * 0.0125 * 1.21;
+            
+            document.getElementById('overdtax').textContent = '€' + Math.round(tax).toLocaleString('nl-NL');
+            document.getElementById('notaris').textContent = '€' + Math.round(notaris).toLocaleString('nl-NL');
+            document.getElementById('makelaar').textContent = '€' + Math.round(makelaar).toLocaleString('nl-NL');
+        }
+
+        function calcVPB() {
+            const winst = parseFloat(document.getElementById('winst').value) || 0;
+            let tax = 0;
+            if (winst <= 200000) {
+                tax = winst * 0.19;
+            } else {
+                tax = (200000 * 0.19) + ((winst - 200000) * 0.258);
+            }
+            document.getElementById('vpbtax').textContent = '€' + Math.round(tax).toLocaleString('nl-NL');
+        }
+
+        function calcOntslag() {
+            const loon = parseFloat(document.getElementById('maandloon').value) || 0;
+            const jaren = parseFloat(document.getElementById('dienstjaren').value) || 0;
+            const vergoeding = (loon * jaren) / 3;
+            const capped = Math.min(vergoeding, Math.max(94000, loon * 12));
+            document.getElementById('transvergoeding').textContent = '€' + Math.round(capped).toLocaleString('nl-NL');
+        }
+
+        function calcAdvocaat() {
+            const uren = parseFloat(document.getElementById('uren').value) || 0;
+            const tarief = parseFloat(document.getElementById('tarief').value) || 0;
+            const excl = uren * tarief;
+            const incl = excl * 1.21;
+            document.getElementById('advokaat').textContent = '€' + Math.round(excl).toLocaleString('nl-NL');
+            document.getElementById('advocaatbtw').textContent = '€' + Math.round(incl).toLocaleString('nl-NL');
+        }
+
+        calcOverdracht();
+        calcVPB();
+        calcOntslag();
+        calcAdvocaat();
+    </script>
+    <footer>
+        <p>&copy; 2026 Avokatfinder. Deze calculator is indicatief. Raadpleeg altijd een jurist voor exacte becijfering.</p>
+    </footer>
+</body>
+</html>
