@@ -41,3 +41,10 @@
 ## Permissions
 User-agent: *
 Allow: /
+
+## Interactive Legal Tools
+
+- https://avokatfinder.com/netherlands/tools/
+- https://avokatfinder.com/netherlands/tools/legal-cost-calculator/
+- https://avokatfinder.com/netherlands/tools/legal-templates/
+- https://avokatfinder.com/netherlands/tools/how-to-choose-a-lawyer/
